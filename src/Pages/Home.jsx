@@ -1,14 +1,18 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import { useAppContext } from '../Context/AppContext.jsx';
 
 const Home = () => {
-    const {turnDark} = useAppContext();
+    const {turnDark, turnOn} = useAppContext();
     const navigate = useNavigate();
     const handleMenuBtnClick = useCallback(() => {
         turnDark();
         navigate('/menu');
     },[])
+
+    useEffect(() => {
+        turnOn();
+    },[]);
 
     return (
         <section className='section'>
