@@ -4,7 +4,7 @@ import {HUE_BRIDGE_IP, USERNAME, LIGHT_ID} from "../env.js";
 const AppContext = createContext(null);
 
 const getLightState = async () => {
-    const res = await fetch(`http://${HUE_BRIDGE_IP}/api/${USERNAME}/lights/${LIGHT_ID}`);
+    const res = await fetch(`https://${HUE_BRIDGE_IP}/api/${USERNAME}/lights/${LIGHT_ID}`);
     const data = await res.json();
     return {
         on: data.state.on,
@@ -13,7 +13,7 @@ const getLightState = async () => {
 }
 
 const turnOn = async () => {
-    const res = await fetch(`http://${HUE_BRIDGE_IP}/api/${USERNAME}/lights/${LIGHT_ID}/state`, {
+    const res = await fetch(`https://${HUE_BRIDGE_IP}/api/${USERNAME}/lights/${LIGHT_ID}/state`, {
         method: 'PUT',
         body: JSON.stringify({
             on: true,
@@ -31,7 +31,7 @@ const turnDark = async () => {
     if(!on) return;
     const newBri = bri - 100 > 0? bri - 100 : 0;
 
-    const res = await fetch(`http://${HUE_BRIDGE_IP}/api/${USERNAME}/lights/${LIGHT_ID}/state`, {
+    const res = await fetch(`https://${HUE_BRIDGE_IP}/api/${USERNAME}/lights/${LIGHT_ID}/state`, {
         method: 'PUT',
         body: JSON.stringify({"bri":newBri}),
     })
